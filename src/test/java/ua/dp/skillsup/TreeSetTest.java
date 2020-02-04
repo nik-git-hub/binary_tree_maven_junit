@@ -11,72 +11,65 @@ public class TreeSetTest {
     private TreeSet set;
 
     @BeforeEach
-    public void init() {
+    void init() {
         set = new TreeSet();
     }
 
     @Test
     @DisplayName("Add value.")
-    public void shouldAddOneValue() {
-        set.add("D");
-        set.add("G");
-        set.add("A");
-        set.add("H");
+    void shouldAddOneValue() {
         set.add("B");
-        set.add("C");
-        set.add("F");
-        set.add("E");
-        assertEquals(8, set.size());
+        assertEquals(1, set.size());
     }
 
     @Test
     @DisplayName("The values must be unique.")
-    public void shouldBeUniqValue() {
+    void shouldBeUniqValue() {
         set.add("C");
         set.add("C");
         assertEquals(1, set.size());
     }
 
     @Test
-    @DisplayName("Set contains element <F>.")
-    public void shouldContainsLeftValue() {
+    @DisplayName("Set contains element <C>.")
+    void shouldContainsLeftValue() {
         set.add("D");
         set.add("G");
-        set.add("A");
-        set.add("H");
         set.add("B");
+        set.add("H");
+        set.add("A");
         set.add("C");
         set.add("F");
         set.add("E");
-        assertTrue(set.contains("F"));
+        assertTrue(set.contains("C"));
     }
 
     @Test
     @DisplayName("Set doesn't contain null.")
-    public void shouldNotContainNull() {
+    void shouldNotContainNull() {
         set.add(null);
         assertFalse(set.contains(null));
     }
 
     @Test
     @DisplayName("Set is not empty.")
-    public void shouldBeNotEmpty() {
+    void shouldBeNotEmpty() {
         set.add("W");
         assertFalse(set.isEmpty());
-
     }
+
     @Test
     @DisplayName("Show set")
-    public void shouldShowSet() {
+    void shouldShowSet() {
         set.add("D");
-        set.add("G");
-        set.add("A");
-        set.add("H");
-        set.add("B");
-        set.add("C");
         set.add("F");
+        set.add("B");
+        set.add("H");
+        set.add("A");
+        set.add("C");
+        set.add("G");
         set.add("E");
-        assertEquals("ABCDEFGH",set.show());
+        assertEquals("ABCDEFGH", set.show());
     }
 
 }

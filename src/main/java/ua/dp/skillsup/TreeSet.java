@@ -36,6 +36,7 @@ public class TreeSet {
         } else if (value.hashCode() > current.getValue().hashCode()) {
             addRight(current, value);
         }
+
     }
 
     private void addLeft(Node current, Object value) {

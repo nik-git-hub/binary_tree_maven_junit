@@ -14,9 +14,9 @@ public class Launcher {
 
         set.add("D");
         set.add("G");
-        set.add("A");
-        set.add("H");
         set.add("B");
+        set.add("H");
+        set.add("A");
         set.add("C");
         set.add("F");
         set.add("E");
