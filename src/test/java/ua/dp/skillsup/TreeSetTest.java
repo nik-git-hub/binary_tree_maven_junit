@@ -18,7 +18,7 @@ public class TreeSetTest {
     @Test
     @DisplayName("Add value.")
     void shouldAddOneValue() {
-        set.add("B");
+        set.add("H");
         assertEquals(1, set.size());
     }
 
@@ -32,7 +32,7 @@ public class TreeSetTest {
 
     @Test
     @DisplayName("Set contains element <C>.")
-    void shouldContainsLeftValue() {
+    void shouldContainsValue() {
         set.add("D");
         set.add("G");
         set.add("B");
@@ -69,7 +69,7 @@ public class TreeSetTest {
         set.add("C");
         set.add("G");
         set.add("E");
-        assertEquals("ABCDEFGH", set.show());
+        assertEquals("ABCDEFGH",set.show());
     }
 
 }

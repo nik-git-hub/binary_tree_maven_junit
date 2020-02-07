@@ -6,55 +6,47 @@ public class TreeSet {
 
     private Node root;
     private int size;
-    private boolean isElement;
-    private static StringBuilder result = new StringBuilder();
-
 
     public void add(Object value) {
         if (Objects.isNull(value)) {
             System.out.println("\nThe value must not be equals null.");
             return;
         }
-
         if (Objects.isNull(root)) {
             root = new Node(value);
             size++;
             return;
         }
-
         add(root, value);
     }
 
     private void add(Node current, Object value) {
-        if (value == current.getValue()) {
-            current.setValue(value);
+        if (value.equals(current.getValue())) {
             return;
         }
-
         if (value.hashCode() < current.getValue().hashCode()) {
             addLeft(current, value);
-        } else if (value.hashCode() > current.getValue().hashCode()) {
-            addRight(current, value);
+            return;
         }
-
+        addRight(current, value);
     }
 
     private void addLeft(Node current, Object value) {
         if (Objects.nonNull(current.getLeft())) {
             add(current.getLeft(), value);
-        } else {
-            current.setLeft(new Node(value));
-            size++;
+            return;
         }
+        current.setLeft(new Node(value));
+        size++;
     }
 
     private void addRight(Node current, Object value) {
         if (Objects.nonNull(current.getRight())) {
             add(current.getRight(), value);
-        } else {
-            current.setRight(new Node(value));
-            size++;
+            return;
         }
+        current.setRight(new Node(value));
+        size++;
     }
 
     public int size() {
@@ -66,46 +58,36 @@ public class TreeSet {
     }
 
     public boolean contains(Object value) {
-        if (isEmpty()) {
-            return false;
-        }
+        if (isEmpty()) return false;
 
-        isElement = false;
-
-        find(root, value);
-
-        return isElement;
+        return find(root, value);
     }
 
-    private void find(Node current, Object value) {
+    private boolean find(Node current, Object value) {
         if (value.equals(current.getValue())) {
-            isElement = true;
-            return;
+            return true;
         }
 
-        if (value.hashCode() < current.getValue().hashCode()) {
-            if (Objects.nonNull(current.getLeft())) {
-                find(current.getLeft(), value);
-            }
-        } else if (value.hashCode() > current.getValue().hashCode()) {
-            if (Objects.nonNull(current.getRight())) {
-                find(current.getRight(), value);
-            }
-        }
+        Node next = value.hashCode() < current.getValue().hashCode()
+                ? current.getLeft()
+                : current.getRight();
 
+        return Objects.nonNull(next)
+                ? find(next, value)
+                : false;
     }
 
     public String show() {
-        result.setLength(0);
-        display(root);
+        StringBuilder result = new StringBuilder();
+        populateResult(root, result);
         return result.toString();
     }
 
-    private static void display(Node node) {
+    private void populateResult(Node node, StringBuilder result) {
         if (Objects.nonNull(node)) {
-            display(node.left);
+            populateResult(node.left, result);
             result.append(node.getValue().toString());
-            display(node.right);
+            populateResult(node.right, result);
         }
     }
 
@@ -121,10 +103,6 @@ public class TreeSet {
 
         public Object getValue() {
             return value;
-        }
-
-        public void setValue(Object value) {
-            this.value = value;
         }
 
         public Node getLeft() {
